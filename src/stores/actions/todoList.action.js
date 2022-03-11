@@ -1,4 +1,4 @@
-import {ADD_ITEM_TODO, REMOVE_ITEM_TODO} from "../type";
+import {ADD_ITEM_TODO, REMOVE_ITEM_TODO, CHANGE_ITEM_TODO} from "../type";
 
 const addTodo = (task) => {
   return {
@@ -7,14 +7,22 @@ const addTodo = (task) => {
   }
 }
 
-const removeTask = (id) => {
+const removeTaskTodo = (id) => {
   return {
     type: REMOVE_ITEM_TODO,
     id,
   }
 }
 
+const changeTaskTodo = (task) => {
+  return {
+    type: CHANGE_ITEM_TODO,
+    payload: task,
+  }
+}
+
 export {
   addTodo,
-  removeTask,
+  removeTaskTodo,
+  changeTaskTodo
 }

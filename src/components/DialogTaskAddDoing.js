@@ -6,16 +6,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {useTheme} from '@mui/material/styles';
-import TextField from "@mui/material/TextField";
+import {TextField} from "@mui/material";
 import {useState} from "react";
-import DateTimePicker from "react-datetime-picker";
+import DatePicker from "react-date-picker";
 import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { Autocomplete } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
 // Member
 import PropTypes from 'prop-types';
 import MultiSelectUnstyled from '@mui/base/MultiSelectUnstyled';
@@ -23,9 +22,6 @@ import { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
-
-import Combobox from "react-widgets/Combobox";
-
 
 
 export default function DialogTask(props) {
@@ -39,18 +35,12 @@ export default function DialogTask(props) {
 
   const [dateEnd, setDateEnd] = useState(new Date())
 
-  const label = [
-    {id: 0, name: 'Complete', color: '#008000', backgroundColor: '#e3f4eb'},
-    {id: 1, name: 'Pending', color: '#e8b65f', backgroundColor: '#fbf2e2'},
-    {id: 2, name: 'Approved', color: '#afbac7', backgroundColor: '#e6e7ea'},
-    {id: 3, name: 'Error', color: '#d9534f', backgroundColor: '#f1c7c6'}
+  const status = [
+    {id: 0, label: 'Complete'},
+    {id: 1, label: 'Pending'},
+    {id: 2, label: 'Approved'},
+    {id: 3, label: 'Error'}
   ]
-
-  const [allowCustom, setAllowCustom] = React.useState(false);
-
-  const onChange = (event) => {
-    setAllowCustom(event.target.checked);
-  };
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -229,10 +219,10 @@ export default function DialogTask(props) {
   };
 
   const member = [
-    {id: 0, name: 'Phạm Minh Sáng', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg/375px-Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg'},
-    {id: 1, name: 'Nguyễn Thành Long', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Suga_x_Galaxy_Samsung_August_2021.png/375px-Suga_x_Galaxy_Samsung_August_2021.png'},
-    {id: 2, name: 'Nguyễn Tiến Đạt', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg/375px-J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg'},
-    {id: 3, name: 'Dương Thị Thúy', avatar: 'https://billboardvn.vn/wp-content/uploads/2019/11/9703c8a7gy1g867u0okpaj21xg1abhdv.jpeg'}
+    {id: 0, label: 'Phạm Minh Sáng', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg/375px-Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg'},
+    {id: 1, label: 'Nguyễn Thành Long', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Suga_x_Galaxy_Samsung_August_2021.png/375px-Suga_x_Galaxy_Samsung_August_2021.png'},
+    {id: 2, label: 'Nguyễn Tiến Đạt', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg/375px-J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg'},
+    {id: 3, label: 'Dương Thị Thúy', image: 'https://billboardvn.vn/wp-content/uploads/2019/11/9703c8a7gy1g867u0okpaj21xg1abhdv.jpeg'}
   ]
 
   return (
@@ -262,37 +252,31 @@ export default function DialogTask(props) {
           rows={2}
           onChange={handleInput('content')}
         />
-
         <TextField
           fullWidth
+          type="number"
           style={{marginTop: '10px'}}
           id="outlined-multiline-static"
           label="Budge"
           multiline
-          InputProps={{
-            startAdornment: <InputAdornment position="start" type="number">$</InputAdornment>,
-          }}
-          type="number"
-          onChange={handleInput('budge')}
+          onChange={handleInput('content')}
         />
         
-        {/* For Label */}
-        <Combobox
-          data={label}
-          dataKey='id'
-          textField='name'
-          style={{marginTop: '20px'}}
-        />
-
+        <Autocomplete
+          disablePortal
+          options={status}
+          renderInput={(params) => <TextField {...params} label="Status" />}
+          sx={{marginTop: '10px'}}
+        ></Autocomplete>
 
         <div style={{display: "flex"}}>
           <div>
             <h4>Date Start</h4>
-            <DateTimePicker onChange={setDateStart} value={dateStart} label="Date Start"/>
+            <DatePicker onChange={setDateStart} value={dateStart} label="Date Start"/>
           </div>
           <div style={{marginLeft: "20px"}}>
             <h4>Date End</h4>
-            <DateTimePicker onChange={setDateEnd} value={dateEnd} label="Date End"/>
+            <DatePicker onChange={setDateEnd} value={dateEnd} label="Date End"/>
           </div>
         </div>
         <h4>Add Member</h4>
@@ -309,7 +293,7 @@ export default function DialogTask(props) {
         </CustomMultiSelect>
         <br></br>
         <Button
-            style={{marginTop: "20px", backgroundColor: '#b99774', color: '#fff'}}
+            style={{marginTop: "20px", backgroundColor: '#a78ba1', color: '#fff'}}
             variant="contained"
             component="label"
           >

@@ -43,7 +43,7 @@ const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundImage: "linear-gradient(to right, #b99774, #a68ba0, #9db0c9"}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography

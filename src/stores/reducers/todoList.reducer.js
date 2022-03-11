@@ -1,8 +1,49 @@
+import { compose } from "@mui/system";
 import {ADD_ITEM_TODO, CHANGE_ITEM_TODO, REMOVE_ITEM_TODO} from "../type";
 
 const initState = [
-  {id: 0, title: 'What is Lorem Ipsum?', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-  {id: 1, title: 'Why do we use it?', content: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."},
+  {
+    id: 0,
+    title: 'Brand logo design',
+    content: "Choose and Customise a Design on Our Online Logo Maker! Create Your Perfect Brand Logo Fast & Easy.",
+    label: {id: 2, name: 'Approved', color: '#afbac7', backgroundColor: '#e6e7ea'},
+    budget: '198',
+    dateStart: '2015-05-16T05:50:06.7199222+07:00',
+    dateEnd: '2016-05-16T05:50:06.7199222+07:00', // datetime
+    members: [
+      {
+      id: 0,
+      name: 'Phạm Minh Sáng',
+      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+      },
+      {
+      id: 1,
+      name: 'Nguyễn Thành Long',
+      avatar: 'https://thao68.com/wp-content/uploads/2022/02/avatar-hero-team-15.jpg',
+      }
+    ],
+    comments: [
+      {id: 0, content: 'Comment of Sang', idUser: 0}
+    ],
+    attachFile: [
+      {urlFile: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg', type: 'image'}
+    ],
+    join: {
+      id: 0,
+      name: 'Phạm Minh Sáng',
+      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+    },
+    author: {
+      id: 0,
+      name: 'Phạm Minh Sáng',
+      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+    },
+    status: 'Archive',
+    type: {
+      id: 0,
+      name: 'todoList'
+    }
+  },
 ];
 
 function todoList(state = initState, action) {
@@ -14,7 +55,12 @@ function todoList(state = initState, action) {
       const newState = state.filter(value => value.id !== action.id);
       return newState;
     case CHANGE_ITEM_TODO:
-      return [...state];
+      const newState2 = [...state];
+      // Tìm vị trí của gtri cần sửa (findIndex)
+      // Tại vị trí cần sửa gán bằng giá trị mới
+      newState2[action.payload.id].title = action.payload.title;
+      newState2[action.payload.id].content = action.payload.content;
+      return newState2;
     default:
       return state;
   }

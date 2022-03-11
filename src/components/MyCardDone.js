@@ -3,33 +3,40 @@ import * as React from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useSelector, useDispatch} from "react-redux";
-import { useState } from "react";
-
 
 const MyCard = (props) => {
   const {
     id= 0,
-    title= 'Brand logo design',
+    title= 'Create a New Landing UI',
     content= "Choose and Customise a Design on Our Online Logo Maker! Create Your Perfect Brand Logo Fast & Easy.",
-    label= {id: 2, name: 'Approved', color: '#afbac7', backgroundColor: '#e6e7ea'},
-    budget= '$198',
+    label= {id: 0, name: 'Complete', color: '#008000', backgroundColor: '#e3f4eb'},
+    budget= '$225',
     dateStart= '2015-05-16T05:50:06.7199222+07:00',
     dateEnd= '2016-05-16T05:50:06.7199222+07:00', // datetime
     members= [
       {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+        id: 0,
+        name: 'Phạm Minh Sáng',
+        avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
       },
       {
-      id: 1,
-      name: 'Nguyễn Thành Long',
-      avatar: 'https://thao68.com/wp-content/uploads/2022/02/avatar-hero-team-15.jpg',
+        id: 1,
+        name: 'Nguyễn Thành Long',
+        avatar: 'https://thao68.com/wp-content/uploads/2022/02/avatar-hero-team-15.jpg',
+      },
+      {
+        id: 2,
+        name: 'Nguyễn Tiến Đạt',
+        avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg/375px-Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg',
+      },
+      {
+        id: 3,
+        name: 'Dương Thị Thùy',
+        avatar: 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/2/5/1001294/Ca-Si-Taeyeon-SNSD.jpg',
       }
     ],
     comments= [
-      {id: 0, content: 'Comments of Sang', idUser: 0}
+      {id: 0, content: 'Comment of Sang', idUser: 0}
     ],
     attachFile= [
       {urlFile: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg', type: 'image'}
@@ -46,12 +53,21 @@ const MyCard = (props) => {
     },
     status= 'Archive',
     type= {
-      id: 0,
-      name: 'todoList'
+      id: 2,
+      name: 'donéList'
     },
     onRemove,
     onChange,
   } = props;
+
+  const handlerDelete = () => {
+    onRemove(id)
+  };
+
+  const handlerChange = () => {
+    console.log('=== handlerChange: ',id)
+    onChange(id)
+  };
 
   let img1 = '';
   let img2 = '';
@@ -64,24 +80,11 @@ const MyCard = (props) => {
     img3 = 'none';
   }
 
-  const handlerDelete = () => {
-    onRemove(id)
-  };
-
-  const handlerChange = () => {
-    console.log('=== handlerChange: ',id)
-    onChange(id)
-  };
-
-  
-
-
-
   return (
     <ListItem alignItems="flex-start" onClick={handlerChange}>
       {/* <ListItemAvatar>
         <Avatar
-          alt="Travis"
+          alt="Howard"
           src={image_url}
         ></Avatar>
       </ListItemAvatar> */}
@@ -127,7 +130,7 @@ const MyCard = (props) => {
               alt="Travis"
               src={members[1].avatar}
               sx={{
-                boxShadow: "0 0 4px rgba(0, 0, 0, 0.4)",
+                boxShadow: "0 0 4px rgba(0,0,0,0.4)",
                 border: "1px solid #ccc",
                 position: "absolute",
                 top: "45px",
@@ -137,7 +140,7 @@ const MyCard = (props) => {
             ></Avatar>
             <span style={{
               color: '#fff',
-              backgroundColor: "#b99774",
+              backgroundColor: "#9db0c9",
               padding: "10px",
               borderRadius: "500px",
               position: "absolute",
@@ -153,7 +156,6 @@ const MyCard = (props) => {
       <ListItemText
         primary={
           <React.Fragment>
-
             <Typography
               sx={{display: 'flex', justifyContent: "center", backgroundColor: label.backgroundColor, padding: "5px", borderRadius: "20px", width: "80px", float: "right"}}
               component="span"
@@ -165,6 +167,7 @@ const MyCard = (props) => {
             </Typography>
             <div style={{clear: "both"}}></div>
           </React.Fragment>
+          
         }
         secondary={
           <React.Fragment>
@@ -175,7 +178,7 @@ const MyCard = (props) => {
               color="text.primary"
               fontWeight="bold"
             >
-              ${budget}
+              {budget}
             </Typography>
             <Typography
               sx={{textAlign: "end"}}
