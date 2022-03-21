@@ -14,7 +14,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { Autocomplete } from '@mui/material';
+import { Autocomplete, Card } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import PropTypes from 'prop-types';
@@ -25,7 +25,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
 
 import Combobox from "react-widgets/Combobox";
-
+import {Image} from 'antd'
 
 
 export default function DialogTaskChange(props) {
@@ -49,7 +49,6 @@ export default function DialogTaskChange(props) {
   }
 
   useEffect(() => {
-    console.log(taskChange)
     if(taskChange)setTask(taskChange)
   }, [taskChange])
 
@@ -103,8 +102,7 @@ export default function DialogTaskChange(props) {
     boxShadow: '0 0 3px rgba(0,0,0,0.4)',
     cursor: 'pointer',
   }
-
-  return (
+    return (
     <Dialog
       fullScreen={fullScreen}
       open={open}
@@ -154,27 +152,55 @@ export default function DialogTaskChange(props) {
         <div style={{display: "flex"}}>
           <div>
             <h4>Date Start</h4>
-            <DateTimePicker onChange={setDateStart} value={dateStart} label="Date Start"/>
+            <DateTimePicker onChange={handleInput('dateStart')} value={task.dateStart} label="Date Start"/>
           </div>
           <div style={{marginLeft: "10px"}}>
             <h4>Date End</h4>
-            <DateTimePicker onChange={setDateEnd} value={dateEnd} label="Date Start"/>
+            <DateTimePicker onChange={handleInput('dateEnd')} value={task.dateEnd} label="Date Start"/>
           </div>
         </div>
+
         
         <Button
             style={{marginTop: "20px", backgroundColor: '#b99774', color: '#fff'}}
             variant="contained"
             component="label"
+            onChange={handleInput('attachFile')}
           >
             Attach File
             <input
               type="file"
               multiple
               style={{marginLeft: '20px'}}
-              // value={task.attachFile}
+              
             />
         </Button>
+        {/* <Image
+          src={task?.attachFile?.[0]?.urlFile}
+          style={{width: "50px", height: "50px"}}
+        ></Image> */}
+        {
+          task?.attachFile && task?.attachFile?.map((element, index) => {
+            return(
+              <div style={{width: '100px', height: '100px', display: 'inline-block', marginTop: '20px'}}>
+                <Image
+                src={element.urlFile}
+                style={{width: "50px", height: "50px"}}
+                ></Image>
+              </div>
+            )
+          })
+        }
+        <h4>Comments</h4>
+        {
+          task?.comments && task?.comments?.map((element, index) => {
+            return(
+              <div key={index}>
+                <p>{index + 1}. {element.content}</p>
+              </div>
+            )
+          })
+        }
         <TextField
           fullWidth
           style={{marginTop: '10px'}}
@@ -182,9 +208,9 @@ export default function DialogTaskChange(props) {
           label="Comments"
           multiline
           rows={2}
-          onChange={handleInput('content')}
+          onChange={handleInput('comments')}
         />
-        <button style={{backgroundColor: "#5cb85c", color: '#fff', border: '1px solid #ccc', borderRadius: '5px'}}>Send Comments</button>
+        {/* <button style={{backgroundColor: "#5cb85c", color: '#fff', border: '1px solid #ccc', borderRadius: '5px'}}>Send Comments</button> */}
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleTask} style={{color: '#5cb85c'}}>

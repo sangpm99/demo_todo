@@ -9,68 +9,30 @@ import { useState } from "react";
 
 const MyCard = (props) => {
   const {
-    id= 0,
-    title= 'Brand logo design',
-    content= "Choose and Customise a Design on Our Online Logo Maker! Create Your Perfect Brand Logo Fast & Easy.",
-    label= {id: 2, name: 'Approved', color: '#afbac7', backgroundColor: '#e6e7ea'},
-    budget= '$198',
-    dateStart= '2015-05-16T05:50:06.7199222+07:00',
-    dateEnd= '2016-05-16T05:50:06.7199222+07:00', // datetime
-    members= [
-      {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
-      },
-      {
-      id: 1,
-      name: 'Nguyễn Thành Long',
-      avatar: 'https://thao68.com/wp-content/uploads/2022/02/avatar-hero-team-15.jpg',
-      }
-    ],
-    comments= [
-      {id: 0, content: 'Comments of Sang', idUser: 0}
-    ],
-    attachFile= [
-      {urlFile: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg', type: 'image'}
-    ],
-    join= {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
-    },
-    author= {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
-    },
-    status= 'Archive',
-    type= {
-      id: 0,
-      name: 'todoList'
-    },
+    todo,
     onRemove,
     onChange,
   } = props;
 
+
   let img1 = '';
   let img2 = '';
   let img3 = '';
-  if(members.length === 1) {
+  if(todo.members.length === 1) {
     img2 = 'none'
     img3 = 'none'
   }
-  else if(members.length === 2) {
+  else if(todo.members.length === 2) {
     img3 = 'none';
   }
 
   const handlerDelete = () => {
-    onRemove(id)
+    onRemove(todo.id)
   };
 
   const handlerChange = () => {
-    console.log('=== handlerChange: ',id)
-    onChange(id)
+    console.log('=== handlerChange: ',todo.id)
+    onChange(todo.id)
   };
 
   
@@ -96,7 +58,7 @@ const MyCard = (props) => {
               color="text.primary"
               fontWeight="bold"
             >
-              {title}
+              {todo.title}
             </Typography>
           </React.Fragment>
         }
@@ -114,39 +76,41 @@ const MyCard = (props) => {
         // }
         secondary={
           <ListItemAvatar>
-            <Avatar
-              alt="Travis"
-              src={members[0].avatar}
-              sx={{
-                boxShadow: "0 0 4px rgba(0,0,0,0.4)",
-                border: "1px solid #ccc",
-                display: img1
-              }}
-            ></Avatar>
-            <Avatar
-              alt="Travis"
-              src={members[1].avatar}
-              sx={{
-                boxShadow: "0 0 4px rgba(0, 0, 0, 0.4)",
-                border: "1px solid #ccc",
+            {
+              todo.members.map((element, index) => {
+                if(index > 1) return null
+                return (
+                  <div key={index}>
+                    <Avatar
+                      alt="Travis"
+                      src={element.avatar}
+                      sx={{
+                        boxShadow: "0 0 4px rgba(0, 0, 0, 0.4)",
+                        border: "1px solid #ccc",
+                        position: "absolute",
+                        top: "45px",
+                        left: 10 + index*30 + 'px',
+                        display: ''
+                      }}
+                    ></Avatar>
+                  </div>
+                )
+              })
+              
+            }
+            <span style={{
+                color: '#fff',
+                backgroundColor: "#b99774",
+                padding: "10px",
+                borderRadius: "500px",
                 position: "absolute",
                 top: "45px",
-                left: "40px",
-                display: img2
-              }}
-            ></Avatar>
-            <span style={{
-              color: '#fff',
-              backgroundColor: "#b99774",
-              padding: "10px",
-              borderRadius: "500px",
-              position: "absolute",
-              top: "45px",
-              left: "60px",
-              boxShadow: "0 0 4px rgba(0,0,0,0.4)",
-              boxSizing: "border-box",
-              display: img3
-            }}>{members.length - 2} +</span>
+                left: "60px",
+                boxShadow: "0 0 4px rgba(0,0,0,0.4)",
+                boxSizing: "border-box",
+                display: img3
+              }}>{todo.members.length - 2} +</span>
+            
           </ListItemAvatar>
         }
       />
@@ -155,13 +119,13 @@ const MyCard = (props) => {
           <React.Fragment>
 
             <Typography
-              sx={{display: 'flex', justifyContent: "center", backgroundColor: label.backgroundColor, padding: "5px", borderRadius: "20px", width: "80px", float: "right"}}
+              sx={{display: 'flex', justifyContent: "center", backgroundColor: todo.label.backgroundColor, padding: "5px", borderRadius: "20px", width: "80px", float: "right"}}
               component="span"
               variant="body2"
-              color={label.color}
+              color={todo.label.color}
               fontWeight="bold"
             >
-              {label.name}
+              {todo.label.name}
             </Typography>
             <div style={{clear: "both"}}></div>
           </React.Fragment>
@@ -175,7 +139,7 @@ const MyCard = (props) => {
               color="text.primary"
               fontWeight="bold"
             >
-              ${budget}
+              ${todo.budget}
             </Typography>
             <Typography
               sx={{textAlign: "end"}}

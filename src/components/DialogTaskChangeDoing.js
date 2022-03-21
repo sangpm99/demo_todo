@@ -39,7 +39,7 @@ export default function DialogTaskChange(props) {
   }
 
   useEffect(() => {
-    console.log(taskChangeDoing)
+    // console.log(taskChangeDoing)
     if(taskChangeDoing)setTask(taskChangeDoing)
   }, [taskChangeDoing])
 

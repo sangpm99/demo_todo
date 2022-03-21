@@ -228,7 +228,7 @@ export default function DialogTask(props) {
     }),
   };
 
-  const member = [
+  const members = [
     {id: 0, name: 'Phạm Minh Sáng', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg/375px-Jin_for_Dispatch_%22Boy_With_Luv%22_MV_behind_the_scene_shooting%2C_15_March_2019_01_%28cropped%29.jpg'},
     {id: 1, name: 'Nguyễn Thành Long', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Suga_x_Galaxy_Samsung_August_2021.png/375px-Suga_x_Galaxy_Samsung_August_2021.png'},
     {id: 2, name: 'Nguyễn Tiến Đạt', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg/375px-J-Hope_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg'},
@@ -282,6 +282,7 @@ export default function DialogTask(props) {
           dataKey='id'
           textField='name'
           style={{marginTop: '20px'}}
+          onChange={this?.handleInput('label')}
         />
 
 
@@ -296,9 +297,9 @@ export default function DialogTask(props) {
           </div>
         </div>
         <h4>Add Member</h4>
-        <CustomMultiSelect>
+        <CustomMultiSelect onChange={this?.handleInput('members')}>
           {
-            member.map((mem) => {
+            members.map((mem) => {
               return (
                 <div key={mem.id}>
                   <StyledOption value={mem.id}>{mem.name}</StyledOption>
@@ -308,18 +309,21 @@ export default function DialogTask(props) {
           }
         </CustomMultiSelect>
         <br></br>
-        <Button
+        {/* <Button
             style={{marginTop: "20px", backgroundColor: '#b99774', color: '#fff'}}
             variant="contained"
             component="label"
+            onChange={handleInput('attachFile')}
           >
-            Attach File
+            
+        </Button> */}
+        Attach File :
             <input
               type="file"
               multiple
               style={{marginLeft: '20px'}}
+              onChange={handleInput('attachFile')}
             />
-        </Button>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleTask} style={{color: '#5cb85c'}}>

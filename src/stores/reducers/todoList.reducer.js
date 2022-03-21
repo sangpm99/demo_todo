@@ -26,23 +26,24 @@ const initState = [
       {id: 0, content: 'Comment of Sang', idUser: 0}
     ],
     attachFile: [
-      {urlFile: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg', type: 'image'}
+      {urlFile: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg', type: 'image'},
+      {urlFile: 'https://thao68.com/wp-content/uploads/2022/02/avatar-hero-team-15.jpg', type: 'image'}
     ],
-    join: {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
-    },
-    author: {
-      id: 0,
-      name: 'Phạm Minh Sáng',
-      avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
-    },
-    status: 'Archive',
-    type: {
-      id: 0,
-      name: 'todoList'
-    }
+    // join: {
+    //   id: 0,
+    //   name: 'Phạm Minh Sáng',
+    //   avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+    // },
+    // author: {
+    //   id: 0,
+    //   name: 'Phạm Minh Sáng',
+    //   avatar: 'https://freenice.net/wp-content/uploads/2021/08/Anh-avatar-anime-cute-de-thuong-cho-nu.jpg',
+    // },
+    // status: 'Archive',
+    // type: {
+    //   id: 0,
+    //   name: 'todoList'
+    // }
   },
 ];
 

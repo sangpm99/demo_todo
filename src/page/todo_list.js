@@ -58,7 +58,7 @@ const TodoList = () => {
   const handleClickOpenChangeTodo = (id) => {
     const idx = todoList.findIndex(value => value.id === id)
     if(idx > -1) {
-      console.log(todoList[idx])
+      // console.log(todoList[idx])
     }
     setTaskChange(todoList[idx]);
     setOpenChange(true);
@@ -68,7 +68,7 @@ const TodoList = () => {
   const handleClickOpenChangeDoing = (id) => {
     const idx1 = doingList.findIndex(value => value.id === id)
     if(idx1 > -1) {
-      console.log(doingList[idx1])
+      // console.log(doingList[idx1])
     }
     setTaskChangeDoing(doingList[idx1]);
     setOpenChangeDoing(true);
@@ -78,7 +78,7 @@ const TodoList = () => {
   const handleClickOpenChangeDone = (id) => {
     const idx2 = doneList.findIndex(value => value.id === id)
     if(idx2 > -1) {
-      console.log(doneList[idx2])
+      // console.log(doneList[idx2])
     }
     setTaskChangeDone(doneList[idx2]);
     setOpenChangeDone(true);
@@ -194,17 +194,10 @@ const TodoList = () => {
               image="image/To-Do.png"
             />
           </Card>
-          {todoList.map(({title, content, id, label, budget, dateStart, dateEnd, attachFile}, index) => 
+          {todoList.map((todo, index) => 
             <div key={index}>
-              <MyCard 
-                id={id}
-                title={title}
-                content={content}
-                label={label}
-                budget={budget}
-                dateStart={dateStart}
-                dateEnd={dateEnd}
-                attachFile={attachFile}
+              <MyCard
+                todo={todo}
                 onRemove={handleRemoveToDo}
                 onChange={handleClickOpenChangeTodo}
               />
